@@ -6,6 +6,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from llm1_medications import extract_medications
 from llm2_dosage_check import check_medications_dosage
 from openai import OpenAI
+from fastapi.middleware.cors import CORSMiddleware
 
 # Ensure OpenAI API key is set
 openai_api_key = os.getenv("OPENAI_API_KEY")
@@ -15,6 +16,15 @@ OpenAI.api_key = openai_api_key
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 def extract_text_from_pdf(pdf_file):
     """Extract text from an uploaded PDF file."""

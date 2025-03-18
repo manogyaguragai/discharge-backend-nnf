@@ -79,8 +79,6 @@ def cross_reference_dosage(medication, bm25_retriever):
 
     # Concatenate text from the retrieved nodes
     context = "\n".join([node.get_text() for node in retrieved_nodes])
-    print("butter")
-    print(context)
     
     prompt = f"""
         You are a medical assistant specialized in pharmacology.
